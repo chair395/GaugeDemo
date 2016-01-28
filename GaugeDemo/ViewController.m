@@ -48,17 +48,7 @@
     [test setGaugeValue:sl.value animation:NO];
      [button setTitle:[NSString stringWithFormat:@"%d",(int)sl.value] forState:UIControlStateNormal]; 
 }
-//-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-//{
-//    UITouch *touch =  [touches anyObject];
-//    if(touch.tapCount == 2)
-//    {
-//        self.view.backgroundColor = [UIColor redColor];
-//    }
-//}
 
-
-//alert
 
 
 CGPoint originalLocation;

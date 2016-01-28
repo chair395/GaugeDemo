@@ -17,13 +17,7 @@
 #define CELLNUM        12
 #define GAUGESTRING    @"单位:Km/h"
 #define DEFLUATSIZE    300        
-/************************************************
-    仪表盘的大小不建议设置的太小。
-    长宽都是300是最适合的
-    如果要更小的需要自行修改刻度长度和文字大小
-                            ---powered by 周海锋
-                                2012-3-29
- ***********************************************/
+
 
 @interface Gauge (private)
 - (CGFloat) parseToX:(CGFloat) radius Angle:(CGFloat)angle;
