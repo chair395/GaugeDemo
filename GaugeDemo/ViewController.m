@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "Gauge.h"
 @implementation ViewController
-@synthesize test,sl,button;
+@synthesize test1,test2,sl,button;
 
 - (void)didReceiveMemoryWarning
 {
@@ -22,30 +22,37 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    NSInteger scaleNum=1;
 	// Do any additional setup after loading the view, typically from a nib.
-    test = [[Gauge alloc]initWithFrame:CGRectMake(0, 0, 300, 300) isInner:YES];
-    test.center = self.view.center;
+    test1 = [[Gauge alloc]initWithFrame:CGRectMake(200, 400, 100,100) isInner:YES];
+    test1.backgroundColor=[UIColor redColor];
+    [self.view addSubview:test1];
+    
+//    
+    test2= [[Gauge alloc]initWithFrame:CGRectMake(500, 400, 100,100) isInner:YES];
+    test2.backgroundColor=[UIColor yellowColor];
    
-    [self.view addSubview:test];
+     [self.view addSubview:test2];
+    
     
 }
 - (IBAction)StateChange:(id)sender {
     
    BOOL  isInnerBool= [((UISwitch *)sender) isOn];
 
-    [test removeFromSuperview];
-    test = [[Gauge alloc]initWithFrame:CGRectMake(0, 0, 300, 300) isInner:isInnerBool];
-  
-    test.center = self.view.center;
-    
-     [self.view addSubview:test];
+    [test1 removeFromSuperview];
+    test1 = [[Gauge alloc]initWithFrame:CGRectMake(200, 400, 100,100) isInner:YES];
+    test1.backgroundColor=[UIColor redColor];
+     [self.view addSubview:test1];
   
 
 }
 
 -(IBAction)sliderChange:(id)sender
 {
-    [test setGaugeValue:sl.value animation:NO];
+    [test1 setGaugeValue:sl.value animation:NO];
+    [test2 setGaugeValue:sl.value animation:NO];
      [button setTitle:[NSString stringWithFormat:@"%d",(int)sl.value] forState:UIControlStateNormal]; 
 }
 
@@ -82,7 +89,8 @@ self.view.backgroundColor = color;
 -(IBAction)change :(id)sender
 {
     int tmp = rand()%120;
-    [test setGaugeValue:tmp animation:YES];
+    [test1 setGaugeValue:tmp animation:YES];
+    [test2 setGaugeValue:tmp animation:YES];
     [button setTitle:[NSString stringWithFormat:@"%d",tmp] forState:UIControlStateNormal]; 
 }
 

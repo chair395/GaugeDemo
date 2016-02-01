@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0460816B15232953006EF572 /* pointer1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0460816A15232953006EF572 /* pointer1.png */; };
 		0460816E152329E9006EF572 /* pointer2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0460816D152329E9006EF572 /* pointer2.png */; };
+		7BE6EB221C5B631900F64262 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7BE6EB211C5B631900F64262 /* Images.xcassets */; };
+		7BE6EB241C5B639100F64262 /* clearicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BE6EB231C5B639100F64262 /* clearicon.png */; };
 		B29E8C4A1522168A00FCDDED /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B29E8C491522168A00FCDDED /* UIKit.framework */; };
 		B29E8C4C1522168A00FCDDED /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B29E8C4B1522168A00FCDDED /* Foundation.framework */; };
 		B29E8C4E1522168A00FCDDED /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B29E8C4D1522168A00FCDDED /* CoreGraphics.framework */; };
@@ -26,6 +28,8 @@
 /* Begin PBXFileReference section */
 		0460816A15232953006EF572 /* pointer1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pointer1.png; sourceTree = "<group>"; };
 		0460816D152329E9006EF572 /* pointer2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pointer2.png; sourceTree = "<group>"; };
+		7BE6EB211C5B631900F64262 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		7BE6EB231C5B639100F64262 /* clearicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clearicon.png; sourceTree = "<group>"; };
 		B29E8C451522168A00FCDDED /* GaugeDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GaugeDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B29E8C491522168A00FCDDED /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B29E8C4B1522168A00FCDDED /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -64,6 +68,7 @@
 		B29E8C3A1522168A00FCDDED = {
 			isa = PBXGroup;
 			children = (
+				7BE6EB231C5B639100F64262 /* clearicon.png */,
 				B29E8C69152216F400FCDDED /* QuartzCore.framework */,
 				B29E8C4F1522168A00FCDDED /* GaugeDemo */,
 				B29E8C481522168A00FCDDED /* Frameworks */,
@@ -100,6 +105,7 @@
 				B29E8C66152216D000FCDDED /* Gauge.h */,
 				B29E8C67152216D000FCDDED /* Gauge.m */,
 				B29E8C5E1522168B00FCDDED /* ViewController.xib */,
+				7BE6EB211C5B631900F64262 /* Images.xcassets */,
 				B29E8C501522168A00FCDDED /* Supporting Files */,
 			);
 			path = GaugeDemo;
@@ -154,6 +160,11 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0420;
+				TargetAttributes = {
+					B29E8C441522168A00FCDDED = {
+						DevelopmentTeam = N25L25275A;
+					};
+				};
 			};
 			buildConfigurationList = B29E8C3F1522168A00FCDDED /* Build configuration list for PBXProject "GaugeDemo" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -177,8 +188,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BE6EB241C5B639100F64262 /* clearicon.png in Resources */,
 				B29E8C541522168A00FCDDED /* InfoPlist.strings in Resources */,
 				B29E8C601522168B00FCDDED /* ViewController.xib in Resources */,
+				7BE6EB221C5B631900F64262 /* Images.xcassets in Resources */,
 				B29E8C73152218EE00FCDDED /* gaugeback.png in Resources */,
 				B29E8C74152218EE00FCDDED /* pointer.png in Resources */,
 				0460816B15232953006EF572 /* pointer1.png in Resources */,
@@ -228,7 +241,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Chao Wang (N25L25275A)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Chao Wang (N25L25275A)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -243,6 +257,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PROVISIONING_PROFILE = "efefe1fb-4009-4187-a571-2a5f3a489271";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -253,7 +268,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Chao Wang (N25L25275A)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Chao Wang (N25L25275A)";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -262,6 +278,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "efefe1fb-4009-4187-a571-2a5f3a489271";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -270,10 +287,18 @@
 		B29E8C641522168B00FCDDED /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-3";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets-3";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GaugeDemo/GaugeDemo-Prefix.pch";
 				INFOPLIST_FILE = "GaugeDemo/GaugeDemo-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = com.chaowang.GuageChart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "efefe1fb-4009-4187-a571-2a5f3a489271";
+				"PROVISIONING_PROFILE[sdk=*]" = "efefe1fb-4009-4187-a571-2a5f3a489271";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -281,10 +306,17 @@
 		B29E8C651522168B00FCDDED /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-3";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets-3";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Chao Wang (N25L25275A)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Chao Wang (N25L25275A)";
+				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GaugeDemo/GaugeDemo-Prefix.pch";
 				INFOPLIST_FILE = "GaugeDemo/GaugeDemo-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = com.chaowang.GuageChart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "efefe1fb-4009-4187-a571-2a5f3a489271";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

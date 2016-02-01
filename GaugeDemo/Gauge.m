@@ -8,18 +8,19 @@
 
 #import "Gauge.h"
 #import <QuartzCore/QuartzCore.h>
-
 #define MAXOFFSETANGLE 120.0f
 //#define POINTEROFFSET  90.0f
 #define POINTEROFFSET  90.0f
 #define MAXVALUE       120.0f
 #define CELLMARKNUM    5
 #define CELLNUM        12
-#define GAUGESTRING    @"单位:Km/h"
-#define DEFLUATSIZE    300        
+#define GAUGESTRING    @"单位:信心/h"
+//#define DEFLUATSIZE    300
+#define DEFLUATSIZE    100
 
 
 @interface Gauge (private)
+
 - (CGFloat) parseToX:(CGFloat) radius Angle:(CGFloat)angle;
 - (CGFloat) parseToY:(CGFloat) radius Angle:(CGFloat)angle;
 - (CGFloat) transToRadian:(CGFloat)angel;
@@ -28,22 +29,62 @@
 - (void)setTextLabel:(NSInteger)labelNum;
 - (void)setLineMark:(NSInteger)labelNum;
 - (void) pointToAngle:(CGFloat) angle Duration:(CGFloat) duration;
+
+
 @end
+
 @implementation Gauge
 
 
 
 @synthesize gaugeView,pointer,context;
 @synthesize labelArray;
+@synthesize reactArea;
 
 
 
+//- (id)initWithFrame:(CGRect)frame isInner:(BOOL) isInner
+//{
+//    self = [super initWithFrame:frame];
+//    if (self) {
+//        //设置背景透明
+//        [self setBackgroundColor:[UIColor clearColor]];
+//        
+//        scoleNum = DEFLUATSIZE/frame.size.width;
+//        maxNum = MAXVALUE;
+//        minNum = 0.0f;
+//        minAngle = -MAXOFFSETANGLE;
+//        maxAngle = MAXOFFSETANGLE;
+//        gaugeValue = 0.0f;
+//        gaugeAngle = -MAXOFFSETANGLE;
+//        angleperValue = (maxAngle - minAngle)/(maxNum - minNum);
+//        
+//        gaugeView= [UIImage imageNamed:@"gaugeback.png"];
+//        
+//    
+//        //添加指针
+//        UIImage *_pointer = [UIImage imageNamed:@"pointer2.png"];
+//        pointer = [[UIImageView alloc] initWithImage:_pointer];
+//        pointer.layer.anchorPoint = CGPointMake(0.5, 0.78);
+//        pointer.center = self.center;
+//        pointer.transform = CGAffineTransformMakeScale(scoleNum, scoleNum);
+//        self.isInner=isInner;
+//        [self addSubview:pointer];
+//        //设置文字标签
+//        [self setTextLabel:CELLNUM];
+//        //设置指针到0位置
+//        pointer.layer.transform = CATransform3DMakeRotation([self transToRadian:-MAXOFFSETANGLE], 0, 0, 1);
+//    }
+//    
+//    
+//    return self;
+//}
 - (id)initWithFrame:(CGRect)frame isInner:(BOOL) isInner
 {
     self = [super initWithFrame:frame];
     if (self) {
         //设置背景透明
-        [self setBackgroundColor:[UIColor clearColor]];
+        [self setBackgroundColor:[UIColor brownColor]];
         
         scoleNum = DEFLUATSIZE/frame.size.width;
         maxNum = MAXVALUE;
@@ -55,19 +96,27 @@
         angleperValue = (maxAngle - minAngle)/(maxNum - minNum);
         
         gaugeView= [UIImage imageNamed:@"gaugeback.png"];
+        self.center=CGPointMake(frame.origin.x/2
+                                , frame.origin.y/2);
+        
         //添加指针
         UIImage *_pointer = [UIImage imageNamed:@"pointer2.png"];
+        //=@0.3;
         pointer = [[UIImageView alloc] initWithImage:_pointer];
-        pointer.layer.anchorPoint = CGPointMake(0.5, 0.78);
-        pointer.center = self.center;
-        pointer.transform = CGAffineTransformMakeScale(scoleNum, scoleNum);
+        //pointer.layer.anchorPoint = CGPointMake(0.5,0.78);
+        pointer.backgroundColor=[UIColor grayColor];
+        pointer.center = CGPointMake(self.frame.size.width/5+30, (self.frame.size.height/5)+30);
+        pointer.transform = CGAffineTransformMakeScale(0.3, 0.3);
+        reactArea=self.frame;
         self.isInner=isInner;
         [self addSubview:pointer];
         //设置文字标签
         [self setTextLabel:CELLNUM];
         //设置指针到0位置
-        pointer.layer.transform = CATransform3DMakeRotation([self transToRadian:-MAXOFFSETANGLE], 0, 0, 1);
+       // pointer.layer.transform = CATransform3DMakeRotation([self transToRadian:-MAXOFFSETANGLE], 0, 0, 1);
     }
+    
+    
     return self;
 }
 
@@ -81,11 +130,21 @@
     
     CGFloat textDis = (maxNum - minNum)/labelNum;
     CGFloat angelDis = (maxAngle - minAngle)/labelNum;
-    CGFloat radius = (self.center.x - 75)*scoleNum;
+//    CGFloat radius = (self.center.x - 75)*scoleNum;
+     CGFloat radius = (self.frame.size.width- 75)*scoleNum;
     CGFloat currentAngle;
     CGFloat currentText = 0.0f;
-    CGPoint centerPoint = self.center;
-
+   // CGPoint centerPoint = self.center;//TODO
+    
+    //NSLog(@" %@",reactArea);
+//   
+    CGPoint centerPoint = CGPointMake((self.frame.size.width/5)+30
+                                      
+                                      , (self.frame.size.height/5)+30
+                                      
+                                      );
+    
+    
 
     for(int i=0;i<=labelNum;i++)
     {
@@ -99,7 +158,7 @@
 
         label.textAlignment = UITextAlignmentCenter;
         label.text = [NSString stringWithFormat:@"%d",(int)currentText];
-
+        label.font=[UIFont systemFontOfSize:15];
 
         NSInteger *lengthBase=1;
         
@@ -120,7 +179,9 @@
     label.backgroundColor = [UIColor clearColor];
     label.textAlignment = UITextAlignmentCenter;
     label.text = GAUGESTRING;
-    label.center = CGPointMake(centerPoint.x,centerPoint.y*3/2);
+    label.font=[UIFont systemFontOfSize:15];
+    //label.center = CGPointMake(centerPoint.x,centerPoint.y*3/2);old
+     label.center = CGPointMake(centerPoint.x,centerPoint.y);
     [self addSubview:label];    
 }
 
@@ -134,8 +195,11 @@
     CGFloat angelDis = (maxAngle - minAngle)/labelNum;
     CGFloat radius = self.center.x;
     CGFloat currentAngle;
-    CGPoint centerPoint = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
-    
+     CGPoint centerPoint = self.center;
+//    CGPoint centerPoint = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
+//    CGPoint centerPoint = CGPointMake(self.frame.size.width/4, self.frame.size.height/4);
+//    CGPoint centerPoint = CGPointMake((self.frame.size.width/5)+30, (self.frame.size.height/5)+30);
+    scoleNum=3;
     for(int i=0;i<=labelNum;i++)
     {
         currentAngle = minAngle + i * angelDis - POINTEROFFSET;
@@ -148,6 +212,7 @@
         }else{
             CGContextSetStrokeColorWithColor(context, [[UIColor colorWithRed:0 green:1 blue:0 alpha:0.8] CGColor]);
         }
+        
         //绘制不同的长短的刻度
         if(i%5==0)
         {     
@@ -155,13 +220,15 @@
             CGContextSetLineWidth(context, 3);
             CGContextStrokePath(context);   
             CGContextMoveToPoint(context,centerPoint.x+[self parseToX:radius-25*scoleNum Angle:currentAngle], centerPoint.y+[self parseToY:radius-25*scoleNum Angle:currentAngle]);
-            CGContextAddLineToPoint(context,centerPoint.x+[self parseToX:radius-65*scoleNum Angle:currentAngle], centerPoint.y+[self parseToY:radius-65*scoleNum Angle:currentAngle]);
+            CGContextAddLineToPoint(context,centerPoint.x+[self parseToX:radius-45*scoleNum Angle:currentAngle], centerPoint.y+[self parseToY:radius-45*scoleNum Angle:currentAngle]);
+            // CGContextAddLineToPoint(context,centerPoint.x+[self parseToX:radius-65*scoleNum Angle:currentAngle], centerPoint.y+[self parseToY:radius-65*scoleNum Angle:currentAngle]);
         }else{
             CGContextSetLineWidth(context, 2);
             CGContextSetLineCap(context, kCGLineCapSquare);
             CGContextStrokePath(context); 
             CGContextMoveToPoint(context,centerPoint.x+[self parseToX:radius-25*scoleNum Angle:currentAngle], centerPoint.y+[self parseToY:radius-25*scoleNum Angle:currentAngle]);
-            CGContextAddLineToPoint(context,centerPoint.x+[self parseToX:radius-40*scoleNum Angle:currentAngle], centerPoint.y+[self parseToY:radius-40*scoleNum Angle:currentAngle]);   
+//            CGContextAddLineToPoint(context,centerPoint.x+[self parseToX:radius-40*scoleNum Angle:currentAngle], centerPoint.y+[self parseToY:radius-40*scoleNum Angle:currentAngle]);
+              CGContextAddLineToPoint(context,centerPoint.x+[self parseToX:radius-25*scoleNum Angle:currentAngle], centerPoint.y+[self parseToY:radius-25*scoleNum Angle:currentAngle]);
         }
     }
 }
@@ -199,7 +266,7 @@
     anim.autoreverses = NO;
     anim.fillMode = kCAFillModeForwards;
     anim.removedOnCompletion= NO;
-    
+    pointer.transform = CGAffineTransformMakeScale(0.3, 0.3);
     CGFloat distance = angle/10;
     //设置转动路径，不能直接用 CABaseAnimation 的toValue，那样是按最短路径的，转动超过180度时无法控制方向
     int i = 1;
@@ -210,9 +277,12 @@
      [values addObject:[NSValue valueWithCATransform3D:CATransform3DRotate(CATransform3DIdentity, [self transToRadian:(gaugeAngle+distance*(i))], 0, 0, 1)]];
      [values addObject:[NSValue valueWithCATransform3D:CATransform3DRotate(CATransform3DIdentity, [self transToRadian:(gaugeAngle+distance*(i-2))], 0, 0, 1)]];     
      [values addObject:[NSValue valueWithCATransform3D:CATransform3DRotate(CATransform3DIdentity, [self transToRadian:(gaugeAngle+distance*(i-1))], 0, 0, 1)]];
-                                                                           
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(
+                                                                             
+                                                                             0.3, 0.3, 0.3)]];
+    
     anim.values=values;
- 
+    [pointer.layer setSublayerTransform:(CATransform3DMakeScale(0.3, 0.3, 0.3))];
     [pointer.layer addAnimation:anim forKey:@"cubeIn"];
     
     gaugeAngle = gaugeAngle+angle;

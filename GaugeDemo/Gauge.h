@@ -28,6 +28,8 @@
     
     NSMutableArray *labelArray;
     CGContextRef context;
+
+    CGRect reactArea;
     
     Boolean isInner;
 }
@@ -37,6 +39,7 @@
 @property (nonatomic,retain) NSMutableArray *labelArray;
 @property (nonatomic) CGContextRef context;
 @property (nonatomic) Boolean isInner;
+@property (nonatomic) CGRect reactArea;
 -(void)setGaugeValue:(CGFloat)value animation:(BOOL)isAnim;
 -(void)UpdateUI;
 - (id)initWithFrame:(CGRect)frame isInner:(Boolean) isInner;
