@@ -14,8 +14,8 @@
     IBOutlet UIButton *button;
 }
 @property (strong, nonatomic) IBOutlet UISwitch *SwitchBtn;
-@property (nonatomic,retain) Gauge *test1;
-@property (nonatomic,retain) Gauge *test2;
+@property (nonatomic,retain) Gauge *guageLeft;
+@property (nonatomic,retain) Gauge *guageRight;
 @property (nonatomic,retain)  IBOutlet UISlider *sl;
 @property (nonatomic,retain)  IBOutlet UIButton *button;
 -(IBAction)change :(id)sender;

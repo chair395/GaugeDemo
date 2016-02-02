@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
@@ -47,7 +46,7 @@
                     <rect key="frame" x="10" y="413" width="51" height="31"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <connections>
-                        <action selector="StateChange:" destination="-1" eventType="valueChanged" id="M0W-7u-1fv"/>
+                        <action selector="State1Change:" destination="-1" eventType="valueChanged" id="qne-6O-DhJ"/>
                     </connections>
                 </switch>
             </subviews>

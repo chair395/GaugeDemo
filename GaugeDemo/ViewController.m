@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "Gauge.h"
 @implementation ViewController
-@synthesize test1,test2,sl,button;
+@synthesize guageLeft,guageRight,sl,button;
 
 - (void)didReceiveMemoryWarning
 {
@@ -22,38 +22,38 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    NSInteger scaleNum=1;
+
+    NSInteger scaleNum = 1;
 	// Do any additional setup after loading the view, typically from a nib.
-    test1 = [[Gauge alloc]initWithFrame:CGRectMake(200, 400, 100,100) isInner:YES];
-    test1.backgroundColor=[UIColor redColor];
-    [self.view addSubview:test1];
-    
-//    
-    test2= [[Gauge alloc]initWithFrame:CGRectMake(500, 400, 100,100) isInner:YES];
-    test2.backgroundColor=[UIColor yellowColor];
-   
-     [self.view addSubview:test2];
+    guageLeft              = [[Gauge alloc]initWithFrame:CGRectMake(200, 400, 100,100) isInner:YES];
+    guageLeft.backgroundColor=[UIColor redColor];
+    [self.view addSubview:guageLeft];
+
+
+    guageRight              = [[Gauge alloc]initWithFrame:CGRectMake(500, 400, 100,100) isInner:YES];
+    guageRight.backgroundColor=[UIColor yellowColor];
+
+     [self.view addSubview:guageRight];
     
     
 }
 - (IBAction)StateChange:(id)sender {
     
-   BOOL  isInnerBool= [((UISwitch *)sender) isOn];
+   BOOL  isInnerBool= [((UISwitch *)sender)                          isOn];
 
-    [test1 removeFromSuperview];
-    test1 = [[Gauge alloc]initWithFrame:CGRectMake(200, 400, 100,100) isInner:YES];
-    test1.backgroundColor=[UIColor redColor];
-     [self.view addSubview:test1];
-  
+   [guageLeft                                                            removeFromSuperview];
+   guageLeft = [[Gauge alloc]initWithFrame:CGRectMake(200, 400, 100,100) isInner:YES];
+   guageLeft.backgroundColor=[UIColor                                    redColor];
+   [self.view                                                        addSubview:guageLeft];
+
 
 }
 
 -(IBAction)sliderChange:(id)sender
 {
-    [test1 setGaugeValue:sl.value animation:NO];
-    [test2 setGaugeValue:sl.value animation:NO];
-     [button setTitle:[NSString stringWithFormat:@"%d",(int)sl.value] forState:UIControlStateNormal]; 
+[guageLeft setGaugeValue:sl.value                                animation:NO];
+[guageRight setGaugeValue:sl.value                               animation:NO];
+[button setTitle:[NSString stringWithFormat:@"%d",(int)sl.value] forState:UIControlStateNormal];
 }
 
 
@@ -89,8 +89,8 @@ self.view.backgroundColor = color;
 -(IBAction)change :(id)sender
 {
     int tmp = rand()%120;
-    [test1 setGaugeValue:tmp animation:YES];
-    [test2 setGaugeValue:tmp animation:YES];
+    [guageLeft setGaugeValue:tmp animation:YES];
+    [guageRight setGaugeValue:tmp animation:YES];
     [button setTitle:[NSString stringWithFormat:@"%d",tmp] forState:UIControlStateNormal]; 
 }
 
