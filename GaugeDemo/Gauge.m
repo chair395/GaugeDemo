@@ -43,42 +43,6 @@
 
 
 
-//- (id)initWithFrame:(CGRect)frame isInner:(BOOL) isInner
-//{
-//    self = [super initWithFrame:frame];
-//    if (self) {
-//        //设置背景透明
-//        [self setBackgroundColor:[UIColor clearColor]];
-//        
-//        scoleNum = DEFLUATSIZE/frame.size.width;
-//        maxNum = MAXVALUE;
-//        minNum = 0.0f;
-//        minAngle = -MAXOFFSETANGLE;
-//        maxAngle = MAXOFFSETANGLE;
-//        gaugeValue = 0.0f;
-//        gaugeAngle = -MAXOFFSETANGLE;
-//        angleperValue = (maxAngle - minAngle)/(maxNum - minNum);
-//        
-//        gaugeView= [UIImage imageNamed:@"gaugeback.png"];
-//        
-//    
-//        //添加指针
-//        UIImage *_pointer = [UIImage imageNamed:@"pointer2.png"];
-//        pointer = [[UIImageView alloc] initWithImage:_pointer];
-//        pointer.layer.anchorPoint = CGPointMake(0.5, 0.78);
-//        pointer.center = self.center;
-//        pointer.transform = CGAffineTransformMakeScale(scoleNum, scoleNum);
-//        self.isInner=isInner;
-//        [self addSubview:pointer];
-//        //设置文字标签
-//        [self setTextLabel:CELLNUM];
-//        //设置指针到0位置
-//        pointer.layer.transform = CATransform3DMakeRotation([self transToRadian:-MAXOFFSETANGLE], 0, 0, 1);
-//    }
-//    
-//    
-//    return self;
-//}
 - (id)initWithFrame:(CGRect)frame isInner:(BOOL) isInner
 {
     self = [super initWithFrame:frame];
@@ -126,46 +90,43 @@
  */
 -(void)setTextLabel:(NSInteger)labelNum
 {
-     labelArray = [NSMutableArray arrayWithCapacity:labelNum];
-    
-    CGFloat textDis = (maxNum - minNum)/labelNum;
-    CGFloat angelDis = (maxAngle - minAngle)/labelNum;
-//    CGFloat radius = (self.center.x - 75)*scoleNum;
-     CGFloat radius = (self.frame.size.width- 75)*scoleNum;
-    CGFloat currentAngle;
-    CGFloat currentText = 0.0f;
-   // CGPoint centerPoint = self.center;//TODO
-    
-    //NSLog(@" %@",reactArea);
-//   
-    CGPoint centerPoint = CGPointMake((self.frame.size.width/5)+30
-                                      
-                                      , (self.frame.size.height/5)+30
-                                      
-                                      );
-    
-    
+    labelArray                = [NSMutableArray arrayWithCapacity:labelNum];
 
-    for(int i=0;i<=labelNum;i++)
+    CGFloat textDis           = (maxNum - minNum)/labelNum;
+    CGFloat angelDis          = (maxAngle - minAngle)/labelNum;
+    CGFloat radius            = (self.frame.size.width- 75)*scoleNum;
+    CGFloat currentAngle;
+    CGFloat currentText       = 0.0f;
+
+//
+    CGPoint centerPoint       = CGPointMake((self.frame.size.width/5)+30
+
+                                      , (self.frame.size.height/5)+30
+
+                                      );
+
+
+
+    for(int i                 = 0;i<=labelNum;i++)
     {
         //currentAngle = minAngle + i * angelDis - POINTEROFFSET;
-        currentAngle = minAngle + i * angelDis - 90;
-        currentText = minNum + i * textDis;
-        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0 , 0 , 50, 50)];
-        label.autoresizesSubviews = YES;
-        label.textColor = [UIColor whiteColor];
-        label.backgroundColor = [UIColor clearColor];
+    currentAngle              = minAngle + i * angelDis - 90;
+    currentText               = minNum + i * textDis;
+    UILabel *label            = [[UILabel alloc]initWithFrame:CGRectMake(0 , 0 , 50, 50)];
+    label.autoresizesSubviews = YES;
+    label.textColor           = [UIColor whiteColor];
+    label.backgroundColor     = [UIColor clearColor];
 
-        label.textAlignment = UITextAlignmentCenter;
-        label.text = [NSString stringWithFormat:@"%d",(int)currentText];
+    label.textAlignment       = UITextAlignmentCenter;
+    label.text                = [NSString stringWithFormat:@"%d",(int)currentText];
         label.font=[UIFont systemFontOfSize:15];
 
-        NSInteger *lengthBase=1;
-        
+    NSInteger *lengthBase     = 1;
+
         if(self.isInner==YES){
-            lengthBase=2;
+    lengthBase                = 2;
         }
-          label.center = CGPointMake(centerPoint.x+(int)lengthBase*[self parseToX:radius Angle:currentAngle],centerPoint.y+(int)lengthBase*[self parseToY:radius Angle:currentAngle]);
+    label.center              = CGPointMake(centerPoint.x+(int)lengthBase*[self parseToX:radius Angle:currentAngle],centerPoint.y+(int)lengthBase*[self parseToY:radius Angle:currentAngle]);
 //        label.text = [NSString stringWithFormat:@"x%d Y%d", label.center .x, label.center.y ];
 //        label.backgroundColor=[UIColor redColor];
         [labelArray addObject:label];
@@ -173,16 +134,16 @@
         //break;
     }
     // 设置刻度表的名称
-    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0 , 0 ,100, 40)];
+    UILabel *label            = [[UILabel alloc]initWithFrame:CGRectMake(0 , 0 ,100, 40)];
     label.autoresizesSubviews = YES;
-    label.textColor = [UIColor whiteColor];
-    label.backgroundColor = [UIColor clearColor];
-    label.textAlignment = UITextAlignmentCenter;
-    label.text = GAUGESTRING;
+    label.textColor           = [UIColor whiteColor];
+    label.backgroundColor     = [UIColor clearColor];
+    label.textAlignment       = UITextAlignmentCenter;
+    label.text                = GAUGESTRING;
     label.font=[UIFont systemFontOfSize:15];
     //label.center = CGPointMake(centerPoint.x,centerPoint.y*3/2);old
-     label.center = CGPointMake(centerPoint.x,centerPoint.y);
-    [self addSubview:label];    
+    label.center              = CGPointMake(centerPoint.x,centerPoint.y);
+    [self addSubview:label];
 }
 
 /*
@@ -192,17 +153,15 @@
 -(void)setLineMark:(NSInteger)labelNum
 {
 
-    CGFloat angelDis = (maxAngle - minAngle)/labelNum;
-    CGFloat radius = self.center.x;
+    CGFloat angelDis    = (maxAngle - minAngle)/labelNum;
+    CGFloat radius      = self.center.x;
     CGFloat currentAngle;
-     CGPoint centerPoint = self.center;
-//    CGPoint centerPoint = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
-//    CGPoint centerPoint = CGPointMake(self.frame.size.width/4, self.frame.size.height/4);
-//    CGPoint centerPoint = CGPointMake((self.frame.size.width/5)+30, (self.frame.size.height/5)+30);
-    scoleNum=3;
-    for(int i=0;i<=labelNum;i++)
+    CGPoint centerPoint = self.center;
+
+    scoleNum            = 3;
+    for(int i           = 0;i<=labelNum;i++)
     {
-        currentAngle = minAngle + i * angelDis - POINTEROFFSET;
+    currentAngle        = minAngle + i * angelDis - POINTEROFFSET;
         //给刻度标记绘制不同的颜色
         if(i>labelNum*2/3)
         {
@@ -212,20 +171,20 @@
         }else{
             CGContextSetStrokeColorWithColor(context, [[UIColor colorWithRed:0 green:1 blue:0 alpha:0.8] CGColor]);
         }
-        
+
         //绘制不同的长短的刻度
         if(i%5==0)
-        {     
+        {
             CGContextSetLineCap(context, kCGLineCapSquare);
             CGContextSetLineWidth(context, 3);
-            CGContextStrokePath(context);   
+            CGContextStrokePath(context);
             CGContextMoveToPoint(context,centerPoint.x+[self parseToX:radius-25*scoleNum Angle:currentAngle], centerPoint.y+[self parseToY:radius-25*scoleNum Angle:currentAngle]);
             CGContextAddLineToPoint(context,centerPoint.x+[self parseToX:radius-45*scoleNum Angle:currentAngle], centerPoint.y+[self parseToY:radius-45*scoleNum Angle:currentAngle]);
             // CGContextAddLineToPoint(context,centerPoint.x+[self parseToX:radius-65*scoleNum Angle:currentAngle], centerPoint.y+[self parseToY:radius-65*scoleNum Angle:currentAngle]);
         }else{
             CGContextSetLineWidth(context, 2);
             CGContextSetLineCap(context, kCGLineCapSquare);
-            CGContextStrokePath(context); 
+            CGContextStrokePath(context);
             CGContextMoveToPoint(context,centerPoint.x+[self parseToX:radius-25*scoleNum Angle:currentAngle], centerPoint.y+[self parseToY:radius-25*scoleNum Angle:currentAngle]);
 //            CGContextAddLineToPoint(context,centerPoint.x+[self parseToX:radius-40*scoleNum Angle:currentAngle], centerPoint.y+[self parseToY:radius-40*scoleNum Angle:currentAngle]);
               CGContextAddLineToPoint(context,centerPoint.x+[self parseToX:radius-25*scoleNum Angle:currentAngle], centerPoint.y+[self parseToY:radius-25*scoleNum Angle:currentAngle]);
