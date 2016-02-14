@@ -77,7 +77,7 @@
         //设置文字标签
         [self setTextLabel:CELLNUM];
         //设置指针到0位置
-       // pointer.layer.transform = CATransform3DMakeRotation([self transToRadian:-MAXOFFSETANGLE], 0, 0, 1);
+        pointer.layer.transform = CATransform3DMakeRotation([self transToRadian:-MAXOFFSETANGLE], 0, 0, 1);
     }
     
     
@@ -227,6 +227,11 @@
     anim.removedOnCompletion= NO;
     pointer.transform = CGAffineTransformMakeScale(0.3, 0.3);
     CGFloat distance = angle/10;
+    
+    
+        [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(
+    
+                                                                                 0.3, 0.3, 0.3)]];
     //设置转动路径，不能直接用 CABaseAnimation 的toValue，那样是按最短路径的，转动超过180度时无法控制方向
     int i = 1;
     for(;i<=10;i++){
@@ -236,12 +241,10 @@
      [values addObject:[NSValue valueWithCATransform3D:CATransform3DRotate(CATransform3DIdentity, [self transToRadian:(gaugeAngle+distance*(i))], 0, 0, 1)]];
      [values addObject:[NSValue valueWithCATransform3D:CATransform3DRotate(CATransform3DIdentity, [self transToRadian:(gaugeAngle+distance*(i-2))], 0, 0, 1)]];     
      [values addObject:[NSValue valueWithCATransform3D:CATransform3DRotate(CATransform3DIdentity, [self transToRadian:(gaugeAngle+distance*(i-1))], 0, 0, 1)]];
-    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(
-                                                                             
-                                                                             0.3, 0.3, 0.3)]];
-    
+
+//    
     anim.values=values;
-    [pointer.layer setSublayerTransform:(CATransform3DMakeScale(0.3, 0.3, 0.3))];
+//    [pointer.layer setSublayerTransform:(CATransform3DMakeScale(0.3, 0.3, 0.3))];
     [pointer.layer addAnimation:anim forKey:@"cubeIn"];
     
     gaugeAngle = gaugeAngle+angle;

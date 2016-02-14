@@ -36,6 +36,13 @@
      [self.view addSubview:guageRight];
     
     
+    
+    self.view.backgroundColor=[UIColor redColor];
+    
+    
+    
+    
+    
 }
 - (IBAction)StateChange:(id)sender {
     
